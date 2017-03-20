@@ -6,6 +6,7 @@ import os
 import pygame
 import time
 import copy
+ #  implement alpha-beta pruning, some other speed optimizations.
 
 class DummyModel:
     def __init__(self):

@@ -229,6 +229,7 @@ def play_abstracted(players, playerids, game, nb_epoch=1000, epsilons=[.1, .1], 
         screen = pygame.display.set_mode((600, 800))
         screen.fill((0, 0, 0))
         for i in range(len(frames)):
+            pygame.event.get()
             if (frames[i][0] != frames[abs(max(0, i-1))][0]).any():
                 base = frames[i][0] * 128
                 base = base[..., None].repeat(3, -1).astype("uint8")

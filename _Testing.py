@@ -12,24 +12,21 @@ gridx, gridy = 6, 6
 hidden_size = 512
 nb_frames = 1
 trainable=True
-# model = Sequential()
-# model.add(Flatten(input_shape=(1, gridx, gridy)))
-# model.add(Reshape((1, gridx, gridy)))
-# model.add(UpSampling2D(size=(4, 4)))
-# model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
-# model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
-# model.add(MaxPooling2D(pool_size=(2, 2)))
-# model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
-# model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
-# model.add(MaxPooling2D(pool_size=(2, 2)))
-# model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
-# model.add(Convolution2D(64, 3, 3, border_mode="same", activation="tanh", trainable=trainable))
-# model.add(Convolution2D(1, 3, 3, border_mode="same", trainable=trainable))
-# model.add(Flatten())
-# model.add(Reshape((gridx*gridy,)))
 model = Sequential()
 model.add(Flatten(input_shape=(1, gridx, gridy)))
-model.add(Dense(gridx*gridy))
+model.add(Reshape((1, gridx, gridy)))
+model.add(UpSampling2D(size=(4, 4)))
+model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
+model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
+model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Convolution2D(64, 3, 3, border_mode="same", activation="relu", trainable=trainable))
+model.add(Convolution2D(64, 3, 3, border_mode="same", activation="tanh", trainable=trainable))
+model.add(Convolution2D(1, 3, 3, border_mode="same", trainable=trainable))
+model.add(Flatten())
+model.add(Reshape((gridx*gridy,)))
 
 load_net = False
 load_weights = True
@@ -42,7 +39,7 @@ t3_3 = TicTacToe(gridx, gridy, values = (1,0,-1), twoplayer=True)
 if load_net:
     model = model_from_json(open('t3-6-6-conv-4.json').read())
 if load_weights:
-    model.load_weights("t3-6-6-linear-1.sav")
+    model.load_weights("'t3-6-6-conv-4.sav")
 
 
 model.compile(sgd(lr=0.01), loss="mse")
